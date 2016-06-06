@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Sobre</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="assets/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/screen.css?v=8d43d51973" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="assets/css/prism.css?v=8d43d51973"/>
+
+    <link rel="canonical" href="about" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="Web Sketch" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sobre" />
+    <meta property="og:description" content="Este site agrega uma série de mini-tutoriais que documentam a minha exploração do HTML5 e JavaScript para fins lúdicos: na criação e manipulação de imagens e gráficos, animações, jogos, e diferentes tipos de interacção com o utilizador. Este projecto surge no âmbito da unidade curricular de Laboratório de Som e" />
+    <meta property="og:url" content="http://localhost:2368/about/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Sobre" />
+    <meta name="twitter:description" content="Este site agrega uma série de mini-tutoriais que documentam a minha exploração do HTML5 e JavaScript para fins lúdicos: na criação e manipulação de imagens e gráficos, animações, jogos, e diferentes tipos de interacção com o utilizador. Este projecto surge no âmbito da unidade curricular de Laboratório de Som e" />
+    <meta name="twitter:url" content="http://localhost:2368/about/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="ines ferreira" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Web Sketch",
+        "logo": "http://localhost:2368/ghost/img/ghosticon.jpg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "ines ferreira",
+        "image": "//www.gravatar.com/avatar/db0bc713747dac76cbfb760fea91ecfe?s=250&d=mm&r=x",
+        "sameAs": []
+    },
+    "headline": "Sobre",
+    "url": "http://localhost:2368/about/",
+    "description": "Este site agrega uma série de mini-tutoriais que documentam a minha exploração do HTML5 e JavaScript para fins lúdicos: na criação e manipulação de imagens e gráficos, animações, jogos, e diferentes tipos de interacção com o utilizador. Este projecto surge no âmbito da unidade curricular de Laboratório de Som e"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.8" />
+    <link rel="alternate" type="application/rss+xml" title="Web Sketch" href="rss/index.html" />
+</head>
+<body class="post-template page-template page">
+
+    <main class="main" role="main">
+
+        
+
+
+
+<header>
+    <nav class="nav-home">
+        <a href="index.html">< home</a>
+        <h1>Web Sketch</h1>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post page">
+
+        <header class="post-header">
+            <h1 class="post-title">Sobre</h1>
+        </header>
+
+        <section class="post-content">
+            <p>Este site agrega uma série de mini-tutoriais que documentam a minha exploração do HTML5 e JavaScript para fins lúdicos: na criação e manipulação de imagens e gráficos, animações, jogos, e diferentes tipos de interacção com o utilizador.</p>
+
+<p>Este projecto surge no âmbito da unidade curricular de <a href="https://sigarra.up.pt/fbaup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=369861">Laboratório de Som e Imagem</a> (2º Ano, Lic Design de Comunicação, FBAUP), que pretende introduzir conceitos e ferramentas relacionados com a tecnologia aplicados no design de comunicação.</p>
+
+<hr />
+
+<p>O conteúdo não está fechado e pretende-se a inclusão de diferentes tutoriais que explorem os temas já apresentados e também a abordagem a novos temas:</p>
+
+<ul>
+<li>Sistemas de Partículas</li>
+<li>Colisões</li>
+<li>Jogos</li>
+<li>Gráficos Generativos</li>
+</ul>
+
+<p>Os conteúdos foram adaptados e desenvolvidos a partir de diversas fontes, destacam-se:</p>
+
+<ul>
+<li><a href="http://wp.eduardomorais.pt/fbaup/lsi/2015-2016/">UC LSI</a></li>
+<li><a href="https://processing.org/">Processing</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial">Canvas API Tutorial (Mozilla Developer Network)</a> </li>
+<li><a href="http://www.html5canvastutorials.com/">HTML5 Canvas Tutorials</a></li>
+<li><a href="http://creativejs.com/2011/08/31-days-of-canvas-tutorials/index.html">31 Days of Canvas</a></li>
+<li><a href="http://www.html5rocks.com/">HTML5 Rocks</a></li>
+</ul>
+        </section>
+
+    </article>
+</main>
+
+
+        <!--footer class="site-footer clearfix">
+            <div class="copyright"><a href="http://localhost:2368">Web Sketch</a> &copy; 2016</div>
+            <div class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></div>
+        </footer-->
+    </main>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="assets/js/jquery.fitvids.js?v=8d43d51973"></script>
+    <script type="text/javascript" src="assets/js/index.js?v=8d43d51973"></script>
+<script type="text/javascript" src="assets/js/prism.js?v=8d43d51973"></script>
+</body>
+</html>

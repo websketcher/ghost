@@ -1,0 +1,300 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Web Sketch</title><description>Web Sketch</description><link>http://localhost:2368/</link><generator>Ghost 0.8</generator><lastBuildDate>Mon, 06 Jun 2016 06:00:47 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Primeiros Passos</title><description>Introdução ao HTML5 Canvas: desenhar com JavaScript a partir da Canvas API</description><link>http://localhost:2368/getting-started/</link><guid isPermaLink="false">d3f9a936-3ca1-4a78-9427-e6d3b547eb47</guid><category>Getting Started</category><category>Canvas</category><dc:creator>ines ferreira</dc:creator><pubDate>Sat, 28 May 2016 23:08:46 GMT</pubDate><content:encoded>&lt;p&gt;O elemento &lt;code&gt;&amp;lt;canvas&amp;gt;&lt;/code&gt; define uma região onde se pode “desenhar”. Esta zona pode ser acedida através, por exemplo, de &lt;em&gt;JavaScript&lt;/em&gt; que a partir de várias funções é possível a criação de gráficos, animações e outras composições.&lt;/p&gt;
+
+&lt;p&gt;Segue-se um &lt;em&gt;template&lt;/em&gt; que funcionará como ponto de partida. Para ficar consistente com a tecnologia de eleição da UC - &lt;em&gt;Processing&lt;/em&gt; - as funções principais, aqui, têm o mesmo nome.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-markup"&gt;&amp;lt;!DOCTYPE html&amp;gt;  
+&amp;lt;html&amp;gt;  
+    &amp;lt;head&amp;gt;
+        &amp;lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&amp;gt;
+        &amp;lt;title&amp;gt;Canvas Tutorial&amp;lt;/title&amp;gt;
+        &amp;lt;script type="application/javascript"&amp;gt;
+            function setup() {
+                var canvas = document.getElementById('canvas');
+                if(canvas.getContext){
+                    var ctx = canvas.getContext('2d');
+                    //drawing code here
+                } else {
+                    //canvas-unsupported code here
+                }
+            }
+        &amp;lt;/script&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body onload="setup()"&amp;gt;
+        &amp;lt;canvas id="canvas" width="600" height="600"&amp;gt;&amp;lt;/canvas&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Em cima, colocou-se o elemento canvas com um tamanho predefinido (&lt;code&gt;width="300" height="300"&lt;/code&gt; em &lt;em&gt;pixels&lt;/em&gt;) no documento HTML, e registou-se o &lt;em&gt;handler&lt;/em&gt; &lt;code&gt;setup()&lt;/code&gt; para que quando a pagina estiver carregada (&lt;code&gt;onload&lt;/code&gt;) criar-se o (&lt;em&gt;canvas&lt;/em&gt;) &lt;em&gt;context&lt;/em&gt; (&lt;code&gt;ctx&lt;/code&gt;), a partir do qual criam-se os gráficos, quer em 2d ou 3D (WebGl), dentro do elemento &lt;em&gt;canvas&lt;/em&gt; associado.&lt;/p&gt;
+
+&lt;h4 id="exemplo1desenharumquadrado"&gt;Exemplo 1: Desenhar um quadrado&lt;/h4&gt;
+
+&lt;iframe id="frame_A_skeleton_template" src="http://localhost:2368/snippets/00square.html" width="200" height="200" frameborder="0" style="margin: 20px;"&gt;&lt;/iframe&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;function setup() {  
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+
+    //quadrado azul
+    ctx.fillStyle = "rgb(0, 0, 255)";
+    ctx.fillRect(10, 10, 60, 60);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;O &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle"&gt;&lt;em&gt;fillStyle&lt;/em&gt;&lt;/a&gt;, é usado para definir a cor e/ou estilo das formas criadas: cor, gradiente (linear ou radial) ou padrão (uma imagem repetida). Aqui optou-se pela cor azul (&lt;code&gt;"rgb(0, 0, 255)"&lt;/code&gt;), que também poderia ser definida como &lt;code&gt;"blue"&lt;/code&gt; (ver &lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value"&gt;como definir cores&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;De seguida, para desenhar rectângulos existem três opções, tendo-se optado pelo &lt;em&gt;fillRect&lt;/em&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect"&gt;&lt;code&gt;fillRect(x, y, width, height)&lt;/code&gt;&lt;/a&gt; Um rectângulo preenchido, isto é, com &lt;em&gt;fill&lt;/em&gt; definido pelo &lt;em&gt;fillStyle&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect"&gt;&lt;code&gt;strokeRect(x, y, width, height)&lt;/code&gt;&lt;/a&gt; Para desenhar só o contorno de um rectângulo;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect"&gt;&lt;code&gt;clearRect(x, y, width, height)&lt;/code&gt;&lt;/a&gt;   Limpa a area definida pelo rectângulo.
+(em que, x e y definem a posição do canto superior esquerdo do rectângulo e &lt;em&gt;width&lt;/em&gt; e &lt;em&gt;height&lt;/em&gt; definem respectivamente o comprimento e largura do rectângulo)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tendo em conta que, normalmente, a origem (0,0) do sistema de coordenadas do canvas é no canto superior esquerdo desse elemento, e cada unidade corresponde a 1 pixel, desenhou-se um quadrado com largura e comprimento, &lt;em&gt;width&lt;/em&gt; = &lt;em&gt;height&lt;/em&gt; = 60&lt;em&gt;pixels&lt;/em&gt;, com origem no ponto (x, y) = (10, 10).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://mdn.mozillademos.org/files/224/Canvas_default_grid.png" alt="grid system" style="width: 220px;"&gt;&lt;/p&gt;
+
+&lt;h4 id="exemplo2quadradoemmovimento"&gt;Exemplo 2: Quadrado em movimento&lt;/h4&gt;
+
+&lt;iframe id="frame_A_skeleton_template" src="http://localhost:2368/snippets/01movingSquare.html" width="300" height="200" frameborder="0"&gt;&lt;/iframe&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;var interval,  
+    width = 240, height = 150,
+    x = 0, y = 10;
+
+function setup() {  
+    canvas = document.getElementById("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    ctx = canvas.getContext("2d");
+
+    interval = setInterval(draw, 50);
+}
+
+function draw() {  
+    ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+    ctx.fillRect (0, 0, width, height);
+
+    ctx.fillStyle = "rgb(0, 0, 255)";
+    ctx.fillRect (x, y, 60, 60);
+    x += 5;
+    if (x &amp;gt; width) x = 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;No &lt;em&gt;canvas&lt;/em&gt;, tal como no &lt;em&gt;Processing&lt;/em&gt;, para criar a ilusão de movimento de um objecto, é necessário redesenha-lo na posição seguinte.&lt;/p&gt;
+
+&lt;p&gt;No &lt;em&gt;Processing&lt;/em&gt;, a função &lt;code&gt;draw()&lt;/code&gt; é uma função especial que é chamada de acordo com a &lt;em&gt;framerate&lt;/em&gt; definida. Aqui, para controlar a animação tem-se de se pedir ao &lt;em&gt;browser&lt;/em&gt; para chamar a função &lt;code&gt;draw()&lt;/code&gt;. Dependendo da situação, pode-se usar:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setInterval"&gt;&lt;code&gt;setInterval(function, delay)&lt;/code&gt;&lt;/a&gt; Chama (varias vezes) a função function a cada delay ms.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout"&gt;&lt;code&gt;setTimeout(function, delay)&lt;/code&gt;&lt;/a&gt; Chama (uma vez) a função function ao fim de delay ms.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame"&gt;&lt;code&gt;requestAnimationFrame(callback)&lt;/code&gt;&lt;/a&gt; Informa o browser que se pretende fazer uma animação, e qual a função a chamar, callback, para atualizar essa animação.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Neste caso, utilizou-se &lt;code&gt;setInterval(draw, 50)&lt;/code&gt;, que chama a função draw ao fim de 50ms (equivale a 20 fps).&lt;/p&gt;
+
+&lt;p&gt;A função &lt;code&gt;draw()&lt;/code&gt; começa por limpar a area do canvas, mas como se pretende que o movimento deixe um rasto, definiu-se um valor para transparência. Caso não se desejasse este efeito, em vez da definição de cor e de desenho do rectângulo, bastava definir a propriedade &lt;code&gt;clearRect&lt;/code&gt; com as dimensões do &lt;em&gt;canvas&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;De seguida, define-se a cor (azul) e desenha-se o rectângulo.&lt;/p&gt;</content:encoded></item><item><title>Síntese de Som</title><description>&lt;p&gt;A &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API"&gt;Web Audio API&lt;/a&gt; é utilizada para o processamento e síntese de audio diretamente no browser.&lt;/p&gt;
+
+&lt;p&gt;Tal como na utilização do Canvas é necessaria a definição de um &lt;em&gt;contexto&lt;/em&gt;, para a manipulação de som tambem será necessário um: &lt;a href="https://developer.mozilla.org/en/docs/Web/API/AudioContext"&gt;AudioContext&lt;/a&gt;. No entanto, recomenda-se a utilização só de um contexto audio por&lt;/p&gt;</description><link>http://localhost:2368/sintese-de-som/</link><guid isPermaLink="false">10f7b5f9-3a31-46af-8102-ef70db859ebb</guid><category>Getting Started</category><category>Web Audio API</category><dc:creator>ines ferreira</dc:creator><pubDate>Sun, 29 May 2016 01:40:00 GMT</pubDate><content:encoded>&lt;p&gt;A &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API"&gt;Web Audio API&lt;/a&gt; é utilizada para o processamento e síntese de audio diretamente no browser.&lt;/p&gt;
+
+&lt;p&gt;Tal como na utilização do Canvas é necessaria a definição de um &lt;em&gt;contexto&lt;/em&gt;, para a manipulação de som tambem será necessário um: &lt;a href="https://developer.mozilla.org/en/docs/Web/API/AudioContext"&gt;AudioContext&lt;/a&gt;. No entanto, recomenda-se a utilização só de um contexto audio por aplicação, pois é capaz de manipular diversas entradas de audio.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;var AudioContext = window.AudioContext || window.webkitAudioContext;  
+var audioCtx = new AudioContext();  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Um conceito presente nesta API (e também comum a outras ferramentas de manipulação de audio) é o conceito de &lt;em&gt;nós&lt;/em&gt; e &lt;em&gt;audio routes&lt;/em&gt;. Estes conceitos são um modo simples de representar as ligações entre uma fonte de som e um &lt;em&gt;destino&lt;/em&gt; (pex colunas), que, entre elas, pode existir outros &lt;em&gt;nós&lt;/em&gt; que podem aplicar efeitos sonoros ao som original ou outro tipo de manipulação.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;//Exemplo: criou-se um oscilador como fonte, que se ligou a um nó para 
+//controlo do volume, e por fim ligou-se este nó ao nó final que 
+//usualmente são as colunas do computador.
+var oscillator = audioCtx.createOscillator();  
+var gainNode = audioCtx.createGain();  
+oscillator.connect(gainNode);  
+gainNode.connect(audioCtx.destination);  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Para além do contexto, é necessário uma fonte de audio, pode ser:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Gerada diretamente a partir de JavaScript (pex atraves de um nó audio como um oscilador);&lt;/li&gt;
+&lt;li&gt;Criada a partir de dados &lt;a href="https://en.wikipedia.org/wiki/Pulse-code_modulation"&gt;PCM&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;Retirada de elementos HTML como &lt;code&gt;&amp;amp;lt;video&amp;gt;&lt;/code&gt; ou &lt;code&gt;&amp;amp;lt;audio&amp;gt;&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;A partir da webcam ou microfone do computador do utilizador (&lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API#LocalMediaStream"&gt;WebRTC MediaStream&lt;/a&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Para este exemplo, optou-se por utilizar um (oscilador)[https://en.wikibooks.org/wiki/Sound&lt;em&gt;Synthesis&lt;/em&gt;Theory/Oscillators&lt;em&gt;and&lt;/em&gt;Wavetables] para gerar um tom simples, que será ligado às colunas do computador, &lt;code&gt;context.destination&lt;/code&gt;. Para poder ouvir o som, tem-se que se dar início ao oscilador. No exemplo seguinte, tambem se incluiu (na ultima linha) o pedido para o oscilador terminar ao fim de 3 segundos. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;analyser = audioCtx.createAnalyser();  
+oscillator.connect(analyser);  
+analyser.connect(audioCtx.destination);  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Neste exemplo tambem se pretende visualizar o sinal de audio, para isso vamos acrescentar um &lt;em&gt;nó&lt;/em&gt; ao nosso grafo: &lt;code&gt;AnalyserNode&lt;/code&gt;. Este nó não modifica o sinal, mas permite utilizar esses dados. O &lt;em&gt;analyser&lt;/em&gt; extrai a frequência, onda, entre outros dados. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;var oscillator = audioCtx.createOscillator();  
+var gainNode = audioCtx.createGain();  
+oscillator.connect(gainNode);  
+gainNode.connect(audioCtx.destination);  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;O nó &lt;em&gt;analyser&lt;/em&gt; captura os dados audio atraves da &lt;a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform"&gt;Transformada de Fourier&lt;/a&gt; a uma determinada frequência definida pela propriedade &lt;code&gt;AnalyserNode.fft&lt;/code&gt; (por omissão 2048Hz). Existem diversos métodos para capturar diferentes tipos de dados, neste caso utilzou-se: &lt;code&gt;AnalyserNode.getByteTimeDomainData()&lt;/code&gt;, devolve um array de inteiros (8bit), (Uint8Array)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays].&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;bufferLength = analyser.frequencyBinCount;  
+dataArray = new Uint8Array(bufferLength);  
+analyser.getByteTimeDomainData(dataArray);  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Criou-se um &lt;em&gt;array&lt;/em&gt; Uint8Array, de tamanho determinado pelo &lt;code&gt;AnalyserNode.frequencyBinCount&lt;/code&gt; e preencheu-se esse array com os dados lidos pelo &lt;em&gt;analyser&lt;/em&gt; atraves de &lt;code&gt;AnalyserNode.getByteTimeDomainData(dataArray)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Para o desenho da onda, sempre que se atualiza o desenho (chama-se a função &lt;code&gt;draw()&lt;/code&gt;), tem de se atualizar os dados do &lt;code&gt;dataArray&lt;/code&gt;, ou seja, tem que que se ler os dados que passam do oscilador para o &lt;em&gt;analyser&lt;/em&gt; atraves da função &lt;code&gt;AnalyserNode.getByteTimeDomainData(dataArray)&lt;/code&gt;. Após essa atualização, tem de se percorrer todos esses valores, para atualizar o valor de &lt;code&gt;y&lt;/code&gt; (o valor de &lt;code&gt;x&lt;/code&gt; corresponde a uma divisão da largura do canvas em partes iguais).&lt;/p&gt;
+
+&lt;p&gt;Nota: na demonstração seguinte o oscilador termina ao fim de 20s.&lt;/p&gt;
+
+&lt;iframe id="frame_A_skeleton_template" src="http://localhost:2368/snippets/02soundSynth.html" width="400" height="400" frameborder="0"&gt;&lt;/iframe&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;var canvas, ctx,  
+    oscillator, audioCtx, analyser,
+    freq, waveType, bufferLength, dataArray,
+    width = 300, height = 300, x, y;
+
+function setup() {  
+    var canvas = document.getElementById('canvas');
+
+    freq = 180;
+    waveType = 'sine';
+
+    ctx = canvas.getContext("2d");
+    ctx.strokeStyle = 'rgb(0, 0, 255)';
+
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+
+    oscillator = audioCtx.createOscillator();
+    oscillator.connect(analyser);
+    analyser.connect(audioCtx.destination);
+
+    bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+    analyser.getByteTimeDomainData(dataArray);
+
+    oscillator.type = waveType;
+    oscillator.frequency.value = freq;
+
+    oscillator.start();
+    draw();
+}
+
+function draw() {  
+    requestAnimationFrame(draw);
+
+    analyser.getByteTimeDomainData(dataArray);
+
+    ctx.clearRect(0, 0, width, height);
+    ctx.beginPath();
+
+    var sliceWidth = width / bufferLength;
+
+    x = 0;
+    y = (dataArray[0] / 128.0) * height/2;
+    ctx.moveTo(x, y);
+
+    for(var i = 1; i != bufferLength; i++){
+        x += sliceWidth;
+        y = (dataArray[i] / 128.0) * height/2;
+        ctx.lineTo(x, y );
+    }
+    ctx.stroke();
+
+}
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Aceder à Câmara do Utilizador</title><description>&lt;p&gt;Para poder aceder à câmara (microfone, e/ou ecrã) do utilizador usa-se a &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia"&gt;navigator.getUserMedia API&lt;/a&gt;. &lt;br&gt;
+Note-se que por questões de segurança, esta API só funciona através do protocolo &lt;a href="https://en.wikipedia.org/wiki/HTTPS"&gt;HTTPS&lt;/a&gt;, e se o utilizador der autorização para captar imagem (para poder testar localmente ler &lt;a href="http://localhost:2368/simpleServer"&gt;este artigo&lt;/a&gt;).&lt;/p&gt;
+
+&lt;iframe id="frame_A_skeleton_template" src="http://localhost:2368/snippets/03camera.html" width="320" height="500" frameborder="0"&gt;&lt;/iframe&gt;  
+
+&lt;h4 id="acedercmaradoutilizador"&gt;Aceder à Câmara do&lt;/h4&gt;</description><link>http://localhost:2368/getusercamara/</link><guid isPermaLink="false">d06dac2c-90d5-4db9-a4d5-8f6da39e0ca5</guid><category>Getting Started</category><category>getUserMedia</category><dc:creator>ines ferreira</dc:creator><pubDate>Mon, 30 May 2016 00:07:00 GMT</pubDate><content:encoded>&lt;p&gt;Para poder aceder à câmara (microfone, e/ou ecrã) do utilizador usa-se a &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia"&gt;navigator.getUserMedia API&lt;/a&gt;. &lt;br&gt;
+Note-se que por questões de segurança, esta API só funciona através do protocolo &lt;a href="https://en.wikipedia.org/wiki/HTTPS"&gt;HTTPS&lt;/a&gt;, e se o utilizador der autorização para captar imagem (para poder testar localmente ler &lt;a href="http://localhost:2368/simpleServer"&gt;este artigo&lt;/a&gt;).&lt;/p&gt;
+
+&lt;iframe id="frame_A_skeleton_template" src="http://localhost:2368/snippets/03camera.html" width="320" height="500" frameborder="0"&gt;&lt;/iframe&gt;  
+
+&lt;h4 id="acedercmaradoutilizador"&gt;Aceder à Câmara do Utilizador&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class="language-markup"&gt;&amp;lt;script type="application/javascript"&amp;gt;  
+    var ctx, canvas, video;
+
+    function setup() {
+        canvas = document.getElementById("canvas");
+        ctx = canvas.getContext("2d");
+        video = document.getElementById("video");
+
+        var errBack = function(error) {
+                console.log("Video capture error: ", error.code); 
+            };
+
+        navigator.getUserMedia  = navigator.getUserMedia ||
+              navigator.webkitGetUserMedia ||
+              navigator.mozGetUserMedia ||
+              navigator.msGetUserMedia;
+
+
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia({ "video": true }, function(stream) {
+                video.src = window.URL.createObjectURL(stream);
+            }, errBack);
+        } 
+    }
+
+    function snap(){
+        ctx.drawImage(video, 0, 0, 640, 480);
+    }
+&amp;lt;/script&amp;gt;  
+//...
+&amp;lt;body onload="setup()"&amp;gt;  
+    &amp;lt;video id="video" width="640" height="480" autoplay&amp;gt;&amp;lt;/video&amp;gt;
+    &amp;lt;button id="snapBtn" onclick="snap()"&amp;gt;Snap Photo&amp;lt;/button&amp;gt;
+    &amp;lt;canvas id="canvas" width="640" height="480"&amp;gt;&amp;lt;/canvas&amp;gt;
+&amp;lt;/body&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;No início, colocaram-se as definições do costume, em que se acrescentou a do &lt;em&gt;video&lt;/em&gt;, que corresponde ao elemento &lt;a href="https://developer.mozilla.org/en/docs/Web/HTML/Element/video"&gt;&lt;em&gt;video&lt;/em&gt;&lt;/a&gt; em que aparecerá o que se vê através da câmara do utilizador. Também definiu-se a função &lt;code&gt;errBack&lt;/code&gt; para lidar com erros que apareçam ao aceder à câmara do utilizador, ou caso o utilizador rejeite a ligação.&lt;/p&gt;
+
+&lt;p&gt;Conforme o browser, a função &lt;code&gt;getUserMedia&lt;/code&gt; pode não estar disponível (nos &lt;em&gt;browsers&lt;/em&gt; mais antigos) ou ter nome diferente, para resolver esse problema:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-JavaScript"&gt;navigator.getUserMedia = navigator.getUserMedia ||  
+              navigator.webkitGetUserMedia ||
+              navigator.mozGetUserMedia ||
+              navigator.msGetUserMedia;
+
+if (navigator.getUserMedia) {  
+    // Pode-se avançar
+} else {
+    alert('getUserMedia() is not supported in your browser');
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Se se poder avançar, indica-se a componente a aceder, neste caso só ao à câmara, i.e. ao video: &lt;code&gt;{ "video": true }&lt;/code&gt;, e ligamos a &lt;em&gt;stream&lt;/em&gt; da câmara do utilizador como fonte (&lt;em&gt;source&lt;/em&gt;) do elemento &lt;code&gt;video&lt;/code&gt; anterior:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;navigator.getUserMedia({ "video": true }, function(stream) {  
+                video.src = window.URL.createObjectURL(stream);
+            }, errBack);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note-se que na definição do elemento &lt;code&gt;video&lt;/code&gt;, colocou-se como pré-definição "autoplay", para começar assim que tenha imagem.&lt;/p&gt;
+
+&lt;h4 id="tirarumafotografia"&gt;Tirar uma Fotografia&lt;/h4&gt;
+
+&lt;p&gt;Para tirar uma fotografia, criou-se um botão para &lt;em&gt;disparar&lt;/em&gt; cujo &lt;em&gt;handler&lt;/em&gt; utiliza a funcção &lt;code&gt;drawImage() para exibir um _frame_ do&lt;/code&gt;video` para o &lt;em&gt;canvas&lt;/em&gt;:  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;function snap(){  
+    ctx.drawImage(video, 0, 0, 640, 480);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class="language-markup"&gt;&amp;lt;button id="snapBtn" onclick="snap()"&amp;gt;Snap Photo&amp;lt;/button&amp;gt;  
+&amp;lt;canvas id="canvas" width="640" height="480"&amp;gt;&amp;lt;/canvas&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Exemplo Teclado</title><description>&lt;p&gt;brevemente...&lt;/p&gt;</description><link>http://localhost:2368/sistema-de-particulas/</link><guid isPermaLink="false">f8fe2d82-4bd4-4d55-85de-4bdf63c80a17</guid><dc:creator>ines ferreira</dc:creator><pubDate>Mon, 06 Jun 2016 03:39:33 GMT</pubDate><content:encoded>&lt;p&gt;brevemente...&lt;/p&gt;</content:encoded></item><item><title>Aceder ao Microfone utilizador</title><description>&lt;p&gt;brevemente...&lt;/p&gt;</description><link>http://localhost:2368/aceder-ao-microfone-utilizador/</link><guid isPermaLink="false">82a8eb02-3a3a-4156-ab89-aba8faf95e99</guid><dc:creator>ines ferreira</dc:creator><pubDate>Mon, 06 Jun 2016 03:40:54 GMT</pubDate><content:encoded>&lt;p&gt;brevemente...&lt;/p&gt;</content:encoded></item><item><title>Sistema de Particulas</title><description>&lt;p&gt;brevemente...&lt;/p&gt;</description><link>http://localhost:2368/sistema-de-particulas-2/</link><guid isPermaLink="false">0a31ba63-5de1-4b30-860c-3607268719aa</guid><dc:creator>ines ferreira</dc:creator><pubDate>Mon, 06 Jun 2016 03:41:06 GMT</pubDate><content:encoded>&lt;p&gt;brevemente...&lt;/p&gt;</content:encoded></item></channel></rss>

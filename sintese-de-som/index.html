@@ -1,0 +1,239 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Síntese de Som</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../assets/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=8d43d51973">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+    <link rel="stylesheet" type="text/css" href="../assets/css/prism.css?v=8d43d51973">
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="origin">
+    
+    <meta property="og:site_name" content="Web Sketch">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Síntese de Som">
+    <meta property="og:description" content="A Web Audio API é utilizada para o processamento e síntese de audio diretamente no browser. Tal como na utilização do Canvas é necessaria a definição de um contexto, para a manipulação de som tambem será necessário um: AudioContext. No entanto, recomenda-se a utilização só de um contexto audio por">
+    <meta property="og:url" content="http://localhost:2368/sintese-de-som/">
+    <meta property="article:published_time" content="2016-05-29T01:40:00.000Z">
+    <meta property="article:modified_time" content="2016-06-06T05:38:45.914Z">
+    <meta property="article:tag" content="Getting Started">
+    <meta property="article:tag" content="Web Audio API">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Síntese de Som">
+    <meta name="twitter:description" content="A Web Audio API é utilizada para o processamento e síntese de audio diretamente no browser. Tal como na utilização do Canvas é necessaria a definição de um contexto, para a manipulação de som tambem será necessário um: AudioContext. No entanto, recomenda-se a utilização só de um contexto audio por">
+    <meta name="twitter:url" content="http://localhost:2368/sintese-de-som/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="ines ferreira">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Getting Started, Web Audio API">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Web Sketch",
+        "logo": "http://localhost:2368/ghost/img/ghosticon.jpg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "ines ferreira",
+        "image": "//www.gravatar.com/avatar/db0bc713747dac76cbfb760fea91ecfe?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/ines/",
+        "sameAs": []
+    },
+    "headline": "Síntese de Som",
+    "url": "http://localhost:2368/sintese-de-som/",
+    "datePublished": "2016-05-29T01:40:00.000Z",
+    "dateModified": "2016-06-06T05:38:45.914Z",
+    "keywords": "Getting Started, Web Audio API",
+    "description": "A Web Audio API é utilizada para o processamento e síntese de audio diretamente no browser. Tal como na utilização do Canvas é necessaria a definição de um contexto, para a manipulação de som tambem será necessário um: AudioContext. No entanto, recomenda-se a utilização só de um contexto audio por"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.8">
+    <link rel="alternate" type="application/rss+xml" title="Web Sketch" href="../rss/index.html">
+</head>
+<body class="post-template tag-getting-started tag-web-audio-api">
+
+    <main class="main" role="main">
+
+        
+
+
+<header>
+    <nav class="nav-home">
+        <a href="../">
+        <h1>Web Sketch</h1>
+    </a></nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-getting-started tag-web-audio-api">
+
+        <header class="post-header">
+            <h1 class="post-title">Síntese de Som</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-05-29">29 May 2016</time>  on <a href="../tag/getting-started/">Getting Started</a>, <a href="../tag/web-audio-api/">Web Audio API</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>A <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> é utilizada para o processamento e síntese de audio diretamente no browser.</p>
+
+<p>Tal como na utilização do Canvas é necessaria a definição de um <em>contexto</em>, para a manipulação de som tambem será necessário um: <a href="https://developer.mozilla.org/en/docs/Web/API/AudioContext">AudioContext</a>. No entanto, recomenda-se a utilização só de um contexto audio por aplicação, pois é capaz de manipular diversas entradas de audio.</p>
+
+<pre><code class="language-javascript">var AudioContext = window.AudioContext || window.webkitAudioContext;  
+var audioCtx = new AudioContext();  
+</code></pre>
+
+<p>Um conceito presente nesta API (e também comum a outras ferramentas de manipulação de audio) é o conceito de <em>nós</em> e <em>audio routes</em>. Estes conceitos são um modo simples de representar as ligações entre uma fonte de som e um <em>destino</em> (pex colunas), que, entre elas, pode existir outros <em>nós</em> que podem aplicar efeitos sonoros ao som original ou outro tipo de manipulação.</p>
+
+<pre><code class="language-javascript">//Exemplo: criou-se um oscilador como fonte, que se ligou a um nó para 
+//controlo do volume, e por fim ligou-se este nó ao nó final que 
+//usualmente são as colunas do computador.
+var oscillator = audioCtx.createOscillator();  
+var gainNode = audioCtx.createGain();  
+oscillator.connect(gainNode);  
+gainNode.connect(audioCtx.destination);  
+</code></pre>
+
+<p>Para além do contexto, é necessário uma fonte de audio, pode ser:</p>
+
+<ul>
+<li>Gerada diretamente a partir de JavaScript (pex atraves de um nó audio como um oscilador);</li>
+<li>Criada a partir de dados <a href="https://en.wikipedia.org/wiki/Pulse-code_modulation">PCM</a>;</li>
+<li>Retirada de elementos HTML como <code>&amp;lt;video&gt;</code> ou <code>&amp;lt;audio&gt;</code>;</li>
+<li>A partir da webcam ou microfone do computador do utilizador (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API#LocalMediaStream">WebRTC MediaStream</a>).</li>
+</ul>
+
+<p>Para este exemplo, optou-se por utilizar um (oscilador)[https://en.wikibooks.org/wiki/Sound<em>Synthesis</em>Theory/Oscillators<em>and</em>Wavetables] para gerar um tom simples, que será ligado às colunas do computador, <code>context.destination</code>. Para poder ouvir o som, tem-se que se dar início ao oscilador. No exemplo seguinte, tambem se incluiu (na ultima linha) o pedido para o oscilador terminar ao fim de 3 segundos. </p>
+
+<pre><code class="language-javascript">analyser = audioCtx.createAnalyser();  
+oscillator.connect(analyser);  
+analyser.connect(audioCtx.destination);  
+</code></pre>
+
+<p>Neste exemplo tambem se pretende visualizar o sinal de audio, para isso vamos acrescentar um <em>nó</em> ao nosso grafo: <code>AnalyserNode</code>. Este nó não modifica o sinal, mas permite utilizar esses dados. O <em>analyser</em> extrai a frequência, onda, entre outros dados. </p>
+
+<pre><code class="language-javascript">var oscillator = audioCtx.createOscillator();  
+var gainNode = audioCtx.createGain();  
+oscillator.connect(gainNode);  
+gainNode.connect(audioCtx.destination);  
+</code></pre>
+
+<p>O nó <em>analyser</em> captura os dados audio atraves da <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">Transformada de Fourier</a> a uma determinada frequência definida pela propriedade <code>AnalyserNode.fft</code> (por omissão 2048Hz). Existem diversos métodos para capturar diferentes tipos de dados, neste caso utilzou-se: <code>AnalyserNode.getByteTimeDomainData()</code>, devolve um array de inteiros (8bit), (Uint8Array)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays].</p>
+
+<pre><code class="language-javascript">bufferLength = analyser.frequencyBinCount;  
+dataArray = new Uint8Array(bufferLength);  
+analyser.getByteTimeDomainData(dataArray);  
+</code></pre>
+
+<p>Criou-se um <em>array</em> Uint8Array, de tamanho determinado pelo <code>AnalyserNode.frequencyBinCount</code> e preencheu-se esse array com os dados lidos pelo <em>analyser</em> atraves de <code>AnalyserNode.getByteTimeDomainData(dataArray)</code>.</p>
+
+<p>Para o desenho da onda, sempre que se atualiza o desenho (chama-se a função <code>draw()</code>), tem de se atualizar os dados do <code>dataArray</code>, ou seja, tem que que se ler os dados que passam do oscilador para o <em>analyser</em> atraves da função <code>AnalyserNode.getByteTimeDomainData(dataArray)</code>. Após essa atualização, tem de se percorrer todos esses valores, para atualizar o valor de <code>y</code> (o valor de <code>x</code> corresponde a uma divisão da largura do canvas em partes iguais).</p>
+
+<p>Nota: na demonstração seguinte o oscilador termina ao fim de 20s.</p>
+
+<iframe id="frame_A_skeleton_template" src="../snippets/02soundSynth.html" width="400" height="400" frameborder="0"></iframe>
+
+<pre><code class="language-javascript">var canvas, ctx,  
+    oscillator, audioCtx, analyser,
+    freq, waveType, bufferLength, dataArray,
+    width = 300, height = 300, x, y;
+
+function setup() {  
+    var canvas = document.getElementById('canvas');
+
+    freq = 180;
+    waveType = 'sine';
+
+    ctx = canvas.getContext("2d");
+    ctx.strokeStyle = 'rgb(0, 0, 255)';
+
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+
+    oscillator = audioCtx.createOscillator();
+    oscillator.connect(analyser);
+    analyser.connect(audioCtx.destination);
+
+    bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+    analyser.getByteTimeDomainData(dataArray);
+
+    oscillator.type = waveType;
+    oscillator.frequency.value = freq;
+
+    oscillator.start();
+    draw();
+}
+
+function draw() {  
+    requestAnimationFrame(draw);
+
+    analyser.getByteTimeDomainData(dataArray);
+
+    ctx.clearRect(0, 0, width, height);
+    ctx.beginPath();
+
+    var sliceWidth = width / bufferLength;
+
+    x = 0;
+    y = (dataArray[0] / 128.0) * height/2;
+    ctx.moveTo(x, y);
+
+    for(var i = 1; i != bufferLength; i++){
+        x += sliceWidth;
+        y = (dataArray[i] / 128.0) * height/2;
+        ctx.lineTo(x, y );
+    }
+    ctx.stroke();
+
+}
+</code></pre>
+        </section>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story" href="../getusercamara/">
+        <section class="post">
+            <h2>Aceder à Câmara do Utilizador</h2>
+            <p>Para poder aceder à câmara (microfone, e/ou ecrã) do utilizador usa-se a navigator.getUserMedia API.  Note-se que por…</p>
+        </section>
+    </a>
+    <a class="read-next-story prev" href="../getting-started/">
+        <section class="post">
+            <h2>Primeiros Passos</h2>
+            <p>O elemento &lt;canvas&gt; define uma região onde se pode “desenhar”. Esta zona pode ser acedida através, por…</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        <!--footer class="site-footer clearfix">
+            <div class="copyright"><a href="http://localhost:2368">Web Sketch</a> &copy; 2016</div>
+            <div class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></div>
+        </footer-->
+    </main>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=8d43d51973"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=8d43d51973"></script>
+<script type="text/javascript" src="../assets/js/prism.js?v=8d43d51973"></script>
+</body>

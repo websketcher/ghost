@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Testar HTTPS localmente</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="assets/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/screen.css?v=8d43d51973" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="assets/css/prism.css?v=8d43d51973"/>
+
+    <link rel="canonical" href="simpleServer" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="Web Sketch" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Testar HTTPS localmente" />
+    <meta property="og:description" content="Por questões de segurança, alguns dos temas introduzidos só funcionam através do protocolo HTTPS, para o qual é necessário um certificado SSL, o que não permite abrir um ficheiro HTML local diretamente no browser.  Uma solução para contornar o problema consiste na criação local de um servidor com certificado SSL." />
+    <meta property="og:url" content="http://localhost:2368/simpleserver/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Testar HTTPS localmente" />
+    <meta name="twitter:description" content="Por questões de segurança, alguns dos temas introduzidos só funcionam através do protocolo HTTPS, para o qual é necessário um certificado SSL, o que não permite abrir um ficheiro HTML local diretamente no browser.  Uma solução para contornar o problema consiste na criação local de um servidor com certificado SSL." />
+    <meta name="twitter:url" content="http://localhost:2368/simpleserver/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="ines ferreira" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Web Sketch",
+        "logo": "http://localhost:2368/ghost/img/ghosticon.jpg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "ines ferreira",
+        "image": "//www.gravatar.com/avatar/db0bc713747dac76cbfb760fea91ecfe?s=250&d=mm&r=x",
+        "sameAs": []
+    },
+    "headline": "Testar HTTPS localmente",
+    "url": "http://localhost:2368/simpleserver/",
+    "description": "Por questões de segurança, alguns dos temas introduzidos só funcionam através do protocolo HTTPS, para o qual é necessário um certificado SSL, o que não permite abrir um ficheiro HTML local diretamente no browser.  Uma solução para contornar o problema consiste na criação local de um servidor com certificado SSL."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.8" />
+    <link rel="alternate" type="application/rss+xml" title="Web Sketch" href="rss/index.html" />
+</head>
+<body class="post-template page-template page">
+
+    <main class="main" role="main">
+
+        
+
+
+
+<header>
+    <nav class="nav-home">
+        <a href="index.html">< home</a>
+        <h1>Web Sketch</h1>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post page">
+
+        <header class="post-header">
+            <h1 class="post-title">Testar HTTPS localmente</h1>
+        </header>
+
+        <section class="post-content">
+            <p>Por questões de segurança, alguns dos temas introduzidos só funcionam através do protocolo HTTPS, para o qual é necessário um certificado SSL, o que não permite abrir um ficheiro HTML local diretamente no browser. <br />
+Uma solução para contornar o problema consiste na criação local de um servidor com certificado SSL. <br />
+Segue-se um curto guia de como fazer isto em MacOS e Linux. </p>
+
+<h5 id="gerarumcertificadossl">Gerar um Certificado SSL</h5>
+
+<p>Na linha de comandos correr: </p>
+
+<pre><code>openssl req -new -x509 -keyout server.pem -out path/to/serverCertificate.pem -days 365 -nodes  
+</code></pre>
+
+<p>E preencher a informação pedida.</p>
+
+<h5 id="criarumservidorhttps">Criar um servidor HTTPS</h5>
+
+<ul>
+<li>Copiar o seguinte código para o ficheiro "SimpleSecureHTTPServer.py", substituindo a localização do certificado:</li>
+</ul>
+
+<pre><code class="language-python">import BaseHTTPServer, SimpleHTTPServer  
+import ssl
+
+httpd = BaseHTTPServer.HTTPServer(('localhost', 4443), SimpleHTTPServer.SimpleHTTPRequestHandler)  
+httpd.socket = ssl.wrap_socket (httpd.socket, certfile='path/to/serverCertificate.pem', server_side=True)  
+httpd.serve_forever()  
+</code></pre>
+
+<ul>
+<li>Na linha de comandos, dentro da mesma pasta, correr <code>python -m SimpleSecureHTTPServer</code> ;</li>
+<li>Aceder ao <code>localhost</code> pela porta 4443 (
+poderá aparecer um aviso a dizer que o certificado não é reconhecido mas deve-se prosseguir.)</li>
+</ul>
+        </section>
+
+    </article>
+</main>
+
+
+        <!--footer class="site-footer clearfix">
+            <div class="copyright"><a href="http://localhost:2368">Web Sketch</a> &copy; 2016</div>
+            <div class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></div>
+        </footer-->
+    </main>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="assets/js/jquery.fitvids.js?v=8d43d51973"></script>
+    <script type="text/javascript" src="assets/js/index.js?v=8d43d51973"></script>
+<script type="text/javascript" src="assets/js/prism.js?v=8d43d51973"></script>
+</body>
+</html>

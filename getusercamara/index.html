@@ -1,0 +1,207 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Aceder à Câmara do Utilizador</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../assets/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=8d43d51973">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+    <link rel="stylesheet" type="text/css" href="../assets/css/prism.css?v=8d43d51973">
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="origin">
+    
+    <meta property="og:site_name" content="Web Sketch">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Aceder à Câmara do Utilizador">
+    <meta property="og:description" content="Para poder aceder à câmara (microfone, e/ou ecrã) do utilizador usa-se a navigator.getUserMedia API.  Note-se que por questões de segurança, esta API só funciona através do protocolo HTTPS, e se o utilizador der autorização para captar imagem (para poder testar localmente ler este artigo).    Aceder à Câmara do">
+    <meta property="og:url" content="http://localhost:2368/getusercamara/">
+    <meta property="article:published_time" content="2016-05-30T00:07:00.000Z">
+    <meta property="article:modified_time" content="2016-06-06T03:57:30.767Z">
+    <meta property="article:tag" content="Getting Started">
+    <meta property="article:tag" content="getUserMedia">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Aceder à Câmara do Utilizador">
+    <meta name="twitter:description" content="Para poder aceder à câmara (microfone, e/ou ecrã) do utilizador usa-se a navigator.getUserMedia API.  Note-se que por questões de segurança, esta API só funciona através do protocolo HTTPS, e se o utilizador der autorização para captar imagem (para poder testar localmente ler este artigo).    Aceder à Câmara do">
+    <meta name="twitter:url" content="http://localhost:2368/getusercamara/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="ines ferreira">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Getting Started, getUserMedia">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Web Sketch",
+        "logo": "http://localhost:2368/ghost/img/ghosticon.jpg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "ines ferreira",
+        "image": "//www.gravatar.com/avatar/db0bc713747dac76cbfb760fea91ecfe?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/ines/",
+        "sameAs": []
+    },
+    "headline": "Aceder à Câmara do Utilizador",
+    "url": "http://localhost:2368/getusercamara/",
+    "datePublished": "2016-05-30T00:07:00.000Z",
+    "dateModified": "2016-06-06T03:57:30.767Z",
+    "keywords": "Getting Started, getUserMedia",
+    "description": "Para poder aceder à câmara (microfone, e/ou ecrã) do utilizador usa-se a navigator.getUserMedia API.  Note-se que por questões de segurança, esta API só funciona através do protocolo HTTPS, e se o utilizador der autorização para captar imagem (para poder testar localmente ler este artigo).    Aceder à Câmara do"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.8">
+    <link rel="alternate" type="application/rss+xml" title="Web Sketch" href="../rss/index.html">
+</head>
+<body class="post-template tag-getting-started tag-getusermedia">
+
+    <main class="main" role="main">
+
+        
+
+
+<header>
+    <nav class="nav-home">
+        <a href="../">
+        <h1>Web Sketch</h1>
+    </a></nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-getting-started tag-getusermedia">
+
+        <header class="post-header">
+            <h1 class="post-title">Aceder à Câmara do Utilizador</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-05-30">30 May 2016</time>  on <a href="../tag/getting-started/">Getting Started</a>, <a href="../tag/getusermedia/">getUserMedia</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>Para poder aceder à câmara (microfone, e/ou ecrã) do utilizador usa-se a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia">navigator.getUserMedia API</a>. <br>
+Note-se que por questões de segurança, esta API só funciona através do protocolo <a href="https://en.wikipedia.org/wiki/HTTPS">HTTPS</a>, e se o utilizador der autorização para captar imagem (para poder testar localmente ler <a href="../simpleServer">este artigo</a>).</p>
+
+<iframe id="frame_A_skeleton_template" src="../snippets/03camera.html" width="320" height="500" frameborder="0"></iframe>  
+
+<h4 id="acedercmaradoutilizador">Aceder à Câmara do Utilizador</h4>
+
+<pre><code class="language-markup">&lt;script type="application/javascript"&gt;  
+    var ctx, canvas, video;
+
+    function setup() {
+        canvas = document.getElementById("canvas");
+        ctx = canvas.getContext("2d");
+        video = document.getElementById("video");
+
+        var errBack = function(error) {
+                console.log("Video capture error: ", error.code); 
+            };
+
+        navigator.getUserMedia  = navigator.getUserMedia ||
+              navigator.webkitGetUserMedia ||
+              navigator.mozGetUserMedia ||
+              navigator.msGetUserMedia;
+
+
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia({ "video": true }, function(stream) {
+                video.src = window.URL.createObjectURL(stream);
+            }, errBack);
+        } 
+    }
+
+    function snap(){
+        ctx.drawImage(video, 0, 0, 640, 480);
+    }
+&lt;/script&gt;  
+//...
+&lt;body onload="setup()"&gt;  
+    &lt;video id="video" width="640" height="480" autoplay&gt;&lt;/video&gt;
+    &lt;button id="snapBtn" onclick="snap()"&gt;Snap Photo&lt;/button&gt;
+    &lt;canvas id="canvas" width="640" height="480"&gt;&lt;/canvas&gt;
+&lt;/body&gt;  
+</code></pre>
+
+<p>No início, colocaram-se as definições do costume, em que se acrescentou a do <em>video</em>, que corresponde ao elemento <a href="https://developer.mozilla.org/en/docs/Web/HTML/Element/video"><em>video</em></a> em que aparecerá o que se vê através da câmara do utilizador. Também definiu-se a função <code>errBack</code> para lidar com erros que apareçam ao aceder à câmara do utilizador, ou caso o utilizador rejeite a ligação.</p>
+
+<p>Conforme o browser, a função <code>getUserMedia</code> pode não estar disponível (nos <em>browsers</em> mais antigos) ou ter nome diferente, para resolver esse problema:  </p>
+
+<pre><code class="language-JavaScript">navigator.getUserMedia = navigator.getUserMedia ||  
+              navigator.webkitGetUserMedia ||
+              navigator.mozGetUserMedia ||
+              navigator.msGetUserMedia;
+
+if (navigator.getUserMedia) {  
+    // Pode-se avançar
+} else {
+    alert('getUserMedia() is not supported in your browser');
+}
+</code></pre>
+
+<p>Se se poder avançar, indica-se a componente a aceder, neste caso só ao à câmara, i.e. ao video: <code>{ "video": true }</code>, e ligamos a <em>stream</em> da câmara do utilizador como fonte (<em>source</em>) do elemento <code>video</code> anterior:  </p>
+
+<pre><code>navigator.getUserMedia({ "video": true }, function(stream) {  
+                video.src = window.URL.createObjectURL(stream);
+            }, errBack);
+</code></pre>
+
+<p>Note-se que na definição do elemento <code>video</code>, colocou-se como pré-definição "autoplay", para começar assim que tenha imagem.</p>
+
+<h4 id="tirarumafotografia">Tirar uma Fotografia</h4>
+
+<p>Para tirar uma fotografia, criou-se um botão para <em>disparar</em> cujo <em>handler</em> utiliza a funcção <code>drawImage() para exibir um _frame_ do</code>video` para o <em>canvas</em>:  </p>
+
+<pre><code class="language-javascript">function snap(){  
+    ctx.drawImage(video, 0, 0, 640, 480);
+}
+</code></pre>
+
+<pre><code class="language-markup">&lt;button id="snapBtn" onclick="snap()"&gt;Snap Photo&lt;/button&gt;  
+&lt;canvas id="canvas" width="640" height="480"&gt;&lt;/canvas&gt;  
+</code></pre>
+        </section>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story" href="../sistema-de-particulas/">
+        <section class="post">
+            <h2>Exemplo Teclado</h2>
+            <p>brevemente...…</p>
+        </section>
+    </a>
+    <a class="read-next-story prev" href="../sintese-de-som/">
+        <section class="post">
+            <h2>Síntese de Som</h2>
+            <p>A Web Audio API é utilizada para o processamento e síntese de audio diretamente no browser. Tal como na…</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        <!--footer class="site-footer clearfix">
+            <div class="copyright"><a href="http://localhost:2368">Web Sketch</a> &copy; 2016</div>
+            <div class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></div>
+        </footer-->
+    </main>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=8d43d51973"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=8d43d51973"></script>
+<script type="text/javascript" src="../assets/js/prism.js?v=8d43d51973"></script>
+</body>
